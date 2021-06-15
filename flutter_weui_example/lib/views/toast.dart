@@ -24,7 +24,10 @@ class ToastPage extends StatelessWidget {
             'info top',
             theme: WeButtonType.primary,
             onClick: () {
-              WeToast.info(context)('提示 - top', align: WeToastInfoAlign.top);
+              WeToast.info(context)(
+                '提示 - top',
+                align: WeToastInfoAlign.top,
+              );
             },
           ),
           rowBox,
@@ -32,7 +35,10 @@ class ToastPage extends StatelessWidget {
             'info bottom',
             theme: WeButtonType.primary,
             onClick: () {
-              WeToast.info(context)('提示 - bottom', align: WeToastInfoAlign.bottom);
+              WeToast.info(context)(
+                '提示 - bottom',
+                align: WeToastInfoAlign.bottom,
+              );
             },
           ),
           rowBox,
@@ -40,7 +46,10 @@ class ToastPage extends StatelessWidget {
             'info 自定义时间',
             theme: WeButtonType.primary,
             onClick: () {
-              WeToast.info(context)('5秒消失...', duration: 5000);
+              WeToast.info(context)(
+                '5秒消失...',
+                duration: 5000,
+              );
             },
           ),
           rowBox,
@@ -48,7 +57,11 @@ class ToastPage extends StatelessWidget {
             '自定义距离',
             theme: WeButtonType.primary,
             onClick: () {
-              WeToast.info(context)('只适合align为top或bottom...', align: WeToastInfoAlign.top, distance: 250.0);
+              WeToast.info(context)(
+                '只适合align为top或bottom...',
+                align: WeToastInfoAlign.top,
+                distance: 250.0,
+              );
             },
           ),
           rowBox,
@@ -57,7 +70,20 @@ class ToastPage extends StatelessWidget {
             theme: WeButtonType.primary,
             onClick: () {
               WeToast.info(context)(
-                  Row(mainAxisSize: MainAxisSize.min, children: <Widget>[Icon(WeIcons.loading, color: Colors.white), Padding(padding: EdgeInsets.only(left: 10), child: Text('任意内容...'))]));
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Icon(
+                      WeIcons.loading,
+                      color: Colors.white,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 10),
+                      child: Text('任意内容...'),
+                    ),
+                  ],
+                ),
+              );
             },
           ),
           rowBox,
@@ -66,9 +92,14 @@ class ToastPage extends StatelessWidget {
             'loading',
             theme: WeButtonType.primary,
             onClick: () {
-              final Function close = WeToast.loading(context)(message: '加载中...');
+              final Function close = WeToast.loading(context)(
+                message: '加载中...',
+              );
               // 五秒后关闭
-              Future.delayed(Duration(milliseconds: 5000), close);
+              Future.delayed(
+                Duration(milliseconds: 5000),
+                close,
+              );
             },
           ),
           rowBox,
@@ -84,7 +115,9 @@ class ToastPage extends StatelessWidget {
             'success',
             theme: WeButtonType.primary,
             onClick: () {
-              WeToast.success(context)(message: '已完成');
+              WeToast.success(context)(
+                message: '已完成',
+              );
             },
           ),
           rowBox,
@@ -100,7 +133,9 @@ class ToastPage extends StatelessWidget {
             'fail',
             theme: WeButtonType.primary,
             onClick: () {
-              WeToast.fail(context)(message: '操作失败');
+              WeToast.fail(context)(
+                message: '操作失败',
+              );
             },
           ),
           rowBox,
