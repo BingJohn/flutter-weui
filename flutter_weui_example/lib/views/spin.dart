@@ -39,7 +39,11 @@ class SpinPageState extends State {
           Container(
             height: 10.0,
           ),
-          WeButton(loading ? '停止加载' : '加载', theme: WeButtonType.primary, onClick: toggle),
+          WeButton(
+            loading ? '停止加载' : '加载',
+            theme: WeButtonType.primary,
+            onClick: toggle,
+          ),
         ],
       ),
     );

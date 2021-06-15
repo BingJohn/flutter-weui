@@ -22,9 +22,7 @@ class SwitchPageState extends State {
           TextTitle('默认', noPadding: true),
           WeSwitch(),
           TextTitle('自定义size', noPadding: true),
-          WeSwitch(
-            size: 20.0
-          ),
+          WeSwitch(size: 20.0),
           TextTitle('自定义颜色', noPadding: true),
           WeSwitch(
             color: Colors.red,
@@ -35,29 +33,30 @@ class SwitchPageState extends State {
             checked: true,
           ),
           TextTitle('onChange', noPadding: true),
-          WeSwitch(
-            onChange: (bool value) {
-              WeToast.info(context)(value ? 'open' : 'close');
-            }
-          ),
+          WeSwitch(onChange: (bool value) {
+            WeToast.info(context)(value ? 'open' : 'close');
+          }),
           TextTitle('外部控制 - 受控', noPadding: true),
           WeSwitch(
-            checked: open,
-            onChange: (value) {
-              setState(() {
-                open = value;   
-              });
-            }
-          ),
+              checked: open,
+              onChange: (value) {
+                setState(() {
+                  open = value;
+                });
+              }),
           SizedBox(height: 10.0),
-          WeButton(open ? '关闭' : '打开', theme: WeButtonType.primary, onClick: () {
-            setState(() {
-              open = !open;             
-            });
-          }),
+          WeButton(
+            open ? '关闭' : '打开',
+            theme: WeButtonType.primary,
+            onClick: () {
+              setState(() {
+                open = !open;
+              });
+            },
+          ),
           // WeButton('qrcode', theme: WeButtonType.primary, onClick: scan)
-        ]
-      )
+        ],
+      ),
     );
   }
 }
