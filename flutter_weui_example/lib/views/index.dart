@@ -27,7 +27,7 @@ class IndexState extends State<Index> {
     {
       'title': '表单',
       'icon': 'assets/images/index-icon/icon_nav_form.png',
-      'childer': [
+      'children': [
         {'title': 'Button', 'url': '/button'},
         {'title': 'Checklist', 'url': '/checklist'},
         {'title': 'Checkbox', 'url': '/checkbox'},
@@ -46,7 +46,7 @@ class IndexState extends State<Index> {
     {
       'title': '基础组建',
       'icon': 'assets/images/index-icon/icon_nav_layout.png',
-      'childer': [
+      'children': [
         {'title': 'Badge', 'url': '/badge'},
         {'title': 'Cell', 'url': '/cell'},
         {'title': 'Grid', 'url': '/grid'},
@@ -58,7 +58,7 @@ class IndexState extends State<Index> {
     {
       'title': '展示组件',
       'icon': 'assets/images/index-icon/icon_nav_layout.png',
-      'childer': [
+      'children': [
         {'title': 'Swipe', 'url': '/swipe'},
         {'title': 'Progress', 'url': '/progress'},
         {'title': 'Collapse', 'url': '/collapse'},
@@ -69,7 +69,7 @@ class IndexState extends State<Index> {
     {
       'title': '操作反馈',
       'icon': 'assets/images/index-icon/icon_nav_feedback.png',
-      'childer': [
+      'children': [
         {'title': 'Drawer', 'url': '/drawer'},
         {'title': 'Actionsheet', 'url': '/actionsheet'},
         {'title': 'Dialog', 'url': '/dialog'},
@@ -116,9 +116,22 @@ class IndexState extends State<Index> {
     subList.forEach((dynamic item) {
       final List<Widget> content = [
         Container(
-            padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
-            child:
-                Row(children: <Widget>[Expanded(flex: 1, child: Text(item['title'], style: TextStyle(fontSize: 16.0))), Container(child: Image.asset('assets/images/right-icon.png', height: 16.0))]))
+          padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Text(
+                  item['title'],
+                  style: TextStyle(fontSize: 16.0),
+                ),
+              ),
+              Container(
+                child: Image.asset('assets/images/right-icon.png', height: 16.0),
+              ),
+            ],
+          ),
+        ),
       ];
 
       // 第一个不添加边框
@@ -126,7 +139,8 @@ class IndexState extends State<Index> {
         content.insert(0, Divider(height: 1, color: Color(0xffd8d8d8)));
       }
 
-      widgetList.add(InkWell(
+      widgetList.add(
+        InkWell(
           onTap: () {
             if (item['url'] == null) {
               WeToast.info(context)('正在努力开发中...', duration: 1500);
@@ -134,7 +148,12 @@ class IndexState extends State<Index> {
             }
             Navigator.of(context).pushNamed(item['url']);
           },
-          child: Padding(padding: EdgeInsets.only(left: listPadding, right: listPadding), child: Column(children: content))));
+          child: Padding(
+            padding: EdgeInsets.only(left: listPadding, right: listPadding),
+            child: Column(children: content),
+          ),
+        ),
+      );
     });
 
     return widgetList;
@@ -143,14 +162,27 @@ class IndexState extends State<Index> {
   // 渲染标题
   Widget buildTitle(bool checked, int index, Widget child) {
     return Opacity(
-        opacity: checked ? 0.5 : 1.0,
-        child: Padding(
-            padding: EdgeInsets.only(top: 25.0, right: listPadding, bottom: 25.0, left: listPadding),
-            child: Row(children: <Widget>[
-              // 名称
-              Expanded(flex: 1, child: child),
-              Image.asset(list[index]['icon'], height: 22.0)
-            ])));
+      opacity: checked ? 0.5 : 1.0,
+      child: Padding(
+        padding: EdgeInsets.only(
+          top: 25.0,
+          right: listPadding,
+          bottom: 25.0,
+          left: listPadding,
+        ),
+        child: Row(children: <Widget>[
+          // 名称
+          Expanded(
+            flex: 1,
+            child: child,
+          ),
+          Image.asset(
+            list[index]['icon'],
+            height: 22.0,
+          ),
+        ]),
+      ),
+    );
   }
 
   // 渲染内容
@@ -164,63 +196,78 @@ class IndexState extends State<Index> {
     final theme = WeUi.getTheme(context);
 
     list.forEach((item) {
-      children.add(WeCollapseItem(title: Text(item['title'], style: TextStyle(fontSize: 16.0)), child: Column(children: renderSubItem(item['childer']))));
+      children.add(
+        WeCollapseItem(
+          title: Text(
+            item['title'],
+            style: TextStyle(fontSize: 16.0),
+          ),
+          child: Column(
+            children: renderSubItem(item['children']),
+          ),
+        ),
+      );
     });
 
     return Scaffold(
-        backgroundColor: Color(0xfff8f8f8),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: scan,
-        //   backgroundColor: theme.primaryColor,
-        //   child: Icon(IconData(0xe618, fontFamily: 'iconfont'))
-        // ),
-        body: ListView(children: [
-          // head
-          Stack(
-            children: [
-              Container(
-                  padding: EdgeInsets.all(36.0),
-                  child: Column(children: [
-                    Row(
-                      children: [
-                        Text(
-                          'Flutter WeUi',
-                          style: TextStyle(fontSize: 25.0),
-                        )
-                      ],
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(top: 10.0),
-                      child: Text(
-                        'WeUI 是一套同微信原生视觉体验一致的基础样式库，由微信官方设计团队为微信内网页和微信小程序量身设计，令用户的使用感知更加统一。',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          color: Color(0xff888888),
-                        ),
+      backgroundColor: Color(0xfff8f8f8),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: scan,
+      //   backgroundColor: theme.primaryColor,
+      //   child: Icon(IconData(0xe618, fontFamily: 'iconfont'))
+      // ),
+      body: ListView(children: [
+        // head
+        Stack(
+          children: [
+            Container(
+                padding: EdgeInsets.all(36.0),
+                child: Column(children: [
+                  Row(
+                    children: [
+                      Text(
+                        'Flutter WeUi',
+                        style: TextStyle(fontSize: 25.0),
+                      )
+                    ],
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 10.0),
+                    child: Text(
+                      'WeUI 是一套同微信原生视觉体验一致的基础样式库，由微信官方设计团队为微信内网页和微信小程序量身设计，令用户的使用感知更加统一。',
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        color: Color(0xff888888),
                       ),
-                    )
-                  ])),
-              Positioned(
-                top: 10,
-                right: 20,
-                child: WeButton(
-                  isDefault ? '默认主题' : '自定义主题',
-                  size: WeButtonSize.mini,
-                  onClick: toggleTheme,
-                ),
-              )
-            ],
+                    ),
+                  )
+                ])),
+            Positioned(
+              top: 10,
+              right: 20,
+              child: WeButton(
+                isDefault ? '默认主题' : '自定义主题',
+                size: WeButtonSize.mini,
+                onClick: toggleTheme,
+              ),
+            )
+          ],
+        ),
+        Container(
+          padding: EdgeInsets.only(
+            left: 18.0,
+            right: 18.0,
+            bottom: 10.0,
           ),
-          Container(
-            padding: EdgeInsets.only(left: 18.0, right: 18.0, bottom: 10.0),
-            child: WeCollapse(
-              card: true,
-              accordion: true,
-              buildTitle: buildTitle,
-              buildContent: buildContent,
-              children: children,
-            ),
-          )
-        ]));
+          child: WeCollapse(
+            card: true,
+            accordion: true,
+            buildTitle: buildTitle,
+            buildContent: buildContent,
+            children: children,
+          ),
+        )
+      ]),
+    );
   }
 }
