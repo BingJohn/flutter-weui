@@ -8,9 +8,11 @@ final Widget rowBox = SizedBox(height: 15);
 class ToastPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Sample('Toast',
-        describe: '弹出式提示',
-        child: Column(children: <Widget>[
+    return Sample(
+      'Toast',
+      describe: '弹出式提示',
+      child: Column(
+        children: <Widget>[
           TextTitle('Toast.info', noPadding: true),
           WeButton(
             'default',
@@ -146,6 +148,8 @@ class ToastPage extends StatelessWidget {
               WeToast.fail(context)();
             },
           ),
-        ]));
+        ],
+      ),
+    );
   }
 }
